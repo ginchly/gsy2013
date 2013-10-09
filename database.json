@@ -7,7 +7,7 @@
     "database": "gsy2013",
     "native": true
   },
-  "production": {
+  "prod": {
     "driver": "pg",
     "user": "gphmyxictpltjd",
     "password": "VMIYsYE3k6x3hi1UZZdNz3G7aK",
