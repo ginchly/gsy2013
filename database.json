@@ -11,7 +11,7 @@
     "driver": "pg",
     "user": "gphmyxictpltjd",
     "password": "VMIYsYE3k6x3hi1UZZdNz3G7aK",
-    "host": "localhost",
+    "host": "ec2-54-235-194-252.compute-1.amazonaws.com",
     "database": "d1528ujujppo24",
     "native": true
   }
