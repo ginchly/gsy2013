@@ -148,6 +148,32 @@ app.configure( function() {
         });
     });
 
+    app.post('/api/sessions/:id/transcript', function(req, res) {
+        if(!req.body.hasOwnProperty('transcript')) {
+            res.statusCode = 400;
+            return res.send('Error 400: Post syntax incorrect.');
+        }
+        var query = client.query("INSERT INTO transcripts (transcript, session) VALUES ('" +  req.body.transcript  + "', " + req.params.id + ");");
+        query.on('end', function() {
+            res.json(true);
+        });
+    });
+
+    // Ability to delete sessions and concepts
+    app.delete('/api/sessions/:id', function(req, res) {
+        var query = client.query("DELETE FROM sessions WHERE id=" + req.params.id);
+        query.on('end', function() {
+            res.json(true);
+        });
+    });
+
+    app.delete('/api/concepts/:id', function(req, res) {
+        var query = client.query("DELETE FROM concepts WHERE id=" + req.params.id);
+        query.on('end', function() {
+            res.json(true);
+        });
+    });
+
 });
 
 

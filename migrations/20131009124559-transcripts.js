@@ -3,8 +3,10 @@ var type = dbm.dataType;
 
 exports.up = function (db, callback) {
   db.createTable('transcripts', {
-    id: { type: 'int', primaryKey: true },
-    transcript: 'string'
+    id: { type: 'int', primaryKey: true, autoIncrement: true },
+    transcript: 'string',
+    session: 'int',
+    time: 'int'
   }, callback);
 };
 
