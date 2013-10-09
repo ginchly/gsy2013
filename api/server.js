@@ -2,7 +2,8 @@
 // Module dependencies.
 var applicationRoot = __dirname,
     express = require( 'express' ), //Web framework
-    path = require( 'path' ); //Utilities for dealing with file paths
+    path = require( 'path' ), //Utilities for dealing with file paths
+    url = require('url');
 //Create server
 var app = express();
 
@@ -11,12 +12,9 @@ var pg = require('pg').native, connectionString = process.env.DATABASE_URL || 'p
 client = new pg.Client(connectionString);
 client.connect();
 
-
-var teacherInfo = [{ name: 'Mr Teacher 1', score: 15, allowComments: true},
-{ name: 'Mr Teacher 2', score: 15, allowComments: true}];
-
 // Configure server
 app.configure( function() {
+
     //parses request body and populates request.body
     app.use( express.bodyParser() );
 
@@ -61,25 +59,46 @@ app.configure( function() {
     //Show all errors in development
     app.use( express.errorHandler({ dumpExceptions: true, showStack: true }));
 
-    app.get('/teacher/:id', function(req, res) {
-        query = client.query('SELECT * FROM teachers WHERE id = $1', [req.params.id]);
+    app.get('/api/:collection/:id', function(req, res) {
+        console.log(req.params.collection);
+        query = client.query('SELECT * FROM ' + req.params.collection + ' WHERE id = ' + req.params.id);
           query.on('row', function(result) {
             console.log(result);
-
             if (!result) {
-              return res.send('No data found');
+                return res.send('No data found');
             } else {
-              res.send('Teachers' + result);
+                res.send(result);
             }
           });
     });
 
-    app.get('/teachers', function(req, res) {
-      res.json(teacherInfo);
-          // Database
+    app.get('/api/courses/:id/sessions', function(req, res) {
+        var query = client.query('SELECT * FROM sessions WHERE course = ' + req.params.id);
+        var rows = [];
+        query.on('row', function(row) {
+            //fired once for each row returned
+            rows.push(row);
+        });
+        query.on('end', function() {
+            //fired once and only once, after the last row has been returned and after all 'row' events are emitted
+            //in this example, the 'rows' array now contains an ordered set of all the rows which we received from postgres
+            res.json(rows);
+        });
     });
 
-
+    app.get('/api/sessions/:id/concepts', function(req, res) {
+        var query = client.query('SELECT * FROM concepts WHERE session = ' + req.params.id);
+        var rows = [];
+        query.on('row', function(row) {
+            //fired once for each row returned
+            rows.push(row);
+        });
+        query.on('end', function() {
+            //fired once and only once, after the last row has been returned and after all 'row' events are emitted
+            //in this example, the 'rows' array now contains an ordered set of all the rows which we received from postgres
+            res.json(rows);
+        });
+    });
 
 });
 
