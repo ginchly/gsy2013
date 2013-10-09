@@ -3,10 +3,10 @@ var type = dbm.dataType;
 
 exports.up = function (db, callback) {
 	db.createTable('teachers', {
-		id: { type: 'int', primaryKey: true },
+		id: { type: 'int', primaryKey: true, autoIncrement: true  },
 		name: { type: 'string' }
 	}, function() {
-		db.insert('teachers', ['id','name'] , [1, 'Mr Teacher'], callback);
+		db.insert('teachers', ['name'] , ['Mr Murphy'], callback);
 	});
 };
 

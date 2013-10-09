@@ -100,6 +100,40 @@ app.configure( function() {
         });
     });
 
+
+    app.post('/api/sessions/:id/concepts', function(req, res) {
+        if(!req.body.hasOwnProperty('name')) {
+            res.statusCode = 400;
+            return res.send('Error 400: Post syntax incorrect.');
+        }
+        var query = client.query("INSERT INTO concepts (name, session) VALUES ('" +  req.body.name  + "', " + req.params.id + ");");
+        query.on('end', function() {
+            res.json(true);
+        });
+    });
+
+    app.post('/api/courses', function(req, res) {
+        if(!req.body.hasOwnProperty('name')) {
+            res.statusCode = 400;
+            return res.send('Error 400: Post syntax incorrect.');
+        }
+        var query = client.query("INSERT INTO courses (name) VALUES ('" +  req.body.name  + "');");
+        query.on('end', function() {
+            res.json(true);
+        });
+    });
+
+    app.post('/api/courses/:id/sessions', function(req, res) {
+        if(!req.body.hasOwnProperty('name')) {
+            res.statusCode = 400;
+            return res.send('Error 400: Post syntax incorrect.');
+        }
+        var query = client.query("INSERT INTO sessions (name, course) VALUES ('" +  req.body.name  + "', " + req.params.id + ");");
+        query.on('end', function() {
+            res.json(true);
+        });
+    });
+
 });
 
 
