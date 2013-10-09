@@ -1,6 +1,6 @@
 'use strict';
 
-var Recognition, finalTranscript = '';
+var Recognition, finalTranscript = 'initial test content';
 var recordingStopped;
 
 function addTimestamp() {
@@ -8,6 +8,7 @@ function addTimestamp() {
 }
 
 $( document ).ready(function() {
+	console.log('app start');
 	if (!('webkitSpeechRecognition' in window)) {
 		console.log('not supported');
 	} else {

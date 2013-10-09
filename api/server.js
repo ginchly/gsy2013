@@ -55,7 +55,6 @@ app.configure( function() {
     //Show all errors in development
     app.use( express.errorHandler({ dumpExceptions: true, showStack: true }));
 
-
     app.get('/teacher/:id', function(req, res) {
         res.json(teacherInfo[req.params.id]);
     });
@@ -68,7 +67,7 @@ app.configure( function() {
 
 
 //Start server
-var port =  process.env.PORT || 4711;
+var port =  process.env.PORT || 5000;
 app.listen( port, function() {
     console.log( 'Express server listening on port %d in %s mode', port, app.settings.env );
 });

@@ -30,7 +30,8 @@
     "browserify": "~2.33.0",
     "jquery-browserify": "~1.8.1",
     "grunt-browserify": "~1.2.8",
-    "hogan.js": "~2.0.0"
+    "hogan.js": "~2.0.0",
+    "node-mysql": "~0.3.2"
   },
   "engines": {
     "node": ">=0.10.0",
