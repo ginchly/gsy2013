@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "dependencies": {
     "pg": "2.x",
-    "express": "3.x"
+    "express": "3.x",
+    "db-migrate": "0.6.2"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
