@@ -4,6 +4,15 @@
     "user": "postgres",
     "password": "password",
     "host": "localhost",
-    "database": "gsy2013"
+    "database": "gsy2013",
+    "native": true
+  },
+  "production": {
+    "driver": "pg",
+    "user": "gphmyxictpltjd",
+    "password": "VMIYsYE3k6x3hi1UZZdNz3G7aK",
+    "host": "localhost",
+    "database": "d1528ujujppo24",
+    "native": true
   }
 }
