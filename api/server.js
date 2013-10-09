@@ -6,6 +6,12 @@ var applicationRoot = __dirname,
 //Create server
 var app = express();
 
+var pg = require('pg').native, connectionString = process.env.DATABASE_URL || 'postgres://postgres:password@localhost:5432/gsy2013', client, query;
+
+client = new pg.Client(connectionString);
+client.connect();
+
+
 var teacherInfo = [{ name: 'Mr Teacher 1', score: 15, allowComments: true},
 { name: 'Mr Teacher 2', score: 15, allowComments: true}];
 
@@ -56,12 +62,24 @@ app.configure( function() {
     app.use( express.errorHandler({ dumpExceptions: true, showStack: true }));
 
     app.get('/teacher/:id', function(req, res) {
-        res.json(teacherInfo[req.params.id]);
+        query = client.query('SELECT * FROM teachers WHERE id = $1', [req.params.id]);
+          query.on('row', function(result) {
+            console.log(result);
+
+            if (!result) {
+              return res.send('No data found');
+            } else {
+              res.send('Teachers' + result);
+            }
+          });
     });
 
     app.get('/teachers', function(req, res) {
       res.json(teacherInfo);
+          // Database
     });
+
+
 
 });
 
