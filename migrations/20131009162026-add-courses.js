@@ -4,9 +4,11 @@ var type = dbm.dataType;
 exports.up = function (db, callback) {
 	db.createTable('courses', {
 		id: { type: 'int', primaryKey: true, autoIncrement: true  },
-		name: { type: 'string' }
+		name: { type: 'string' },
+		lat: {type: 'decimal'},
+		long: {type: 'decimal'}
 	}, function() {
-		db.insert('courses', ['name'] , ['CS101'], callback);
+		db.insert('courses', ['name', 'lat', 'long'] , ['CS101', 3.17717, 101.66675], callback);
 	});
 };
 
