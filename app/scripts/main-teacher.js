@@ -27,7 +27,7 @@ $( document ).ready(function() {
 	function getCourses() {
 		var url;
 		if (prod) {
-			url = './api/courses';
+			url = '../api/courses';
 		} else {
 			url = 'http://localhost:5000/api/courses';
 		}
@@ -55,7 +55,7 @@ $( document ).ready(function() {
 	function getSessions(courseId) {
 		var url;
 		if (prod) {
-			url = './api/courses/' + courseId + '/sessions';
+			url = '../api/courses/' + courseId + '/sessions';
 		} else {
 			url = 'http://localhost:5000/api/courses/' + courseId + '/sessions' ;
 		}
@@ -86,7 +86,7 @@ $( document ).ready(function() {
 				var thisId = $(this).data('id');
 				$('#' + thisId).remove();
 				if (prod) {
-					url = './api/sessions/' + thisId;
+					url = '../api/sessions/' + thisId;
 				} else {
 					url = 'http://localhost:5000/api/sessions/' + thisId;
 				}
@@ -109,7 +109,7 @@ $( document ).ready(function() {
 
 				var postUrl;
 				if (prod) {
-					postUrl = './api/courses/' + course + '/sessions';
+					postUrl = '../api/courses/' + course + '/sessions';
 				} else {
 					postUrl = 'http://localhost:5000/api/courses/' + course + '/sessions';
 				}
@@ -134,14 +134,14 @@ $( document ).ready(function() {
 	function getConcepts(sessionId) {
 		var url;
 		if (prod) {
-			url = './api/sessions/' + sessionId + '/concepts';
+			url = '../api/sessions/' + sessionId + '/concepts';
 		} else {
 			url = 'http://localhost:5000/api/sessions/' + sessionId + '/concepts';
 		}
 
 		var scoreUrl;
 		if (prod) {
-			scoreUrl = './api/understandScores';
+			scoreUrl = '../api/understandScores';
 		} else {
 			scoreUrl = 'http://localhost:5000/api/understandScores';
 		}
@@ -177,7 +177,7 @@ $( document ).ready(function() {
 					var thisId = $(this).data('id');
 					$('#' + thisId).remove();
 					if (prod) {
-						url = './api/concepts/' + thisId;
+						url = '../api/concepts/' + thisId;
 					} else {
 						url = 'http://localhost:5000/api/concepts/' + thisId;
 					}
@@ -214,7 +214,7 @@ $( document ).ready(function() {
 					var postUrl;
 
 					if (prod) {
-						postUrl = './api/sessions/' + session + '/concepts';
+						postUrl = '../api/sessions/' + session + '/concepts';
 					} else {
 						postUrl = 'http://localhost:5000/api/sessions/' + session + '/concepts';
 					}
@@ -270,7 +270,7 @@ $( document ).ready(function() {
 		//TODO post to db
 		var postUrl;
 		if (prod) {
-			postUrl = './api/sessions/' + session + '/transcript';
+			postUrl = '../api/sessions/' + session + '/transcript';
 		} else {
 			postUrl = 'http://localhost:5000/api/sessions/' + session + '/transcript';
 		}

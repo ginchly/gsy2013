@@ -70,7 +70,7 @@ $( document ).ready(function() {
 	function getSessions(courseId) {
 		var url;
 		if (prod) {
-			url = './api/courses/' + courseId + '/sessions';
+			url = '../api/courses/' + courseId + '/sessions';
 		} else {
 			url = 'http://localhost:5000/api/courses/' + courseId + '/sessions' ;
 		}
@@ -97,7 +97,7 @@ $( document ).ready(function() {
 	function getConcepts(sessionId) {
 		var url;
 		if (prod) {
-			url = './api/sessions/' + sessionId + '/concepts';
+			url = '../api/sessions/' + sessionId + '/concepts';
 		} else {
 			url = 'http://localhost:5000/api/sessions/' + sessionId + '/concepts';
 		}
@@ -118,7 +118,7 @@ $( document ).ready(function() {
 			$('.js-confused').click(function() {
 				var thisId = $(this).data('id');
 				if (prod) {
-					url = './api/' + thisId + '/understandScores/';
+					url = '../api/' + thisId + '/understandScores/';
 				} else {
 					url = 'http://localhost:5000/api/' + thisId + '/understandScores/';
 				}
