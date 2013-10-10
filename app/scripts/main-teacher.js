@@ -34,12 +34,11 @@ $( document ).ready(function() {
 			url: url
 		})
 		.done(function( data ) {
-			var courseList = '<ul>';
+			var courseList = '';
 			for (var i = 0; i < data.length; i++) {
-				courseList = courseList + '<li><div class="js-link-course" data-id=' + data[i].id + '>' + data[i].name + '</div></li>';
+				courseList += '<div class="row-fluid text-center"><div class="span12"><section class="panel"><div class="js-link-course" data-id=' + data[i].id + '>' + data[i].name + '</section></div></div>';
 			}
-			courseList = courseList + '</ul>';
-			$('#js-all-courses').html(courseList);
+			$('#js-content').html(courseList);
 
 			$('.js-link-course').click(function() {
 				var courseId = $(this).data('id');
@@ -62,11 +61,9 @@ $( document ).ready(function() {
 			url: url
 		})
 		.done(function( data ) {
-			console.log(data);
-			var sessionList = '<h2>Sessions</h2><ul id="js-list">';
+			var sessionList = '<ul id="js-list">';
 			for (var i = 0; i < data.length; i++) {
-				sessionList += '<li id=' + data[i].id + '><span class="js-link-session" data-id=' + data[i].id + '>' + data[i].name +
-				'</span><span class="js-delete" data-id=' + data[i].id + '> (Delete)</span></li>';
+				sessionList += '<div class="row-fluid text-center"><div class="span12"><section class="panel"><div class="js-link-session" data-id=' + data[i].id + '>' + data[i].name + ' <span class="js-delete btn btn-mini btn-warning" data-id=' + data[i].id + '> (Delete)</span></div></section></div></div>';
 			}
 			sessionList += '</ul>';
 			sessionList += '<form class="form-inline" role="form"><div class="form-group">' +
@@ -155,12 +152,12 @@ $( document ).ready(function() {
 				url: url
 			}).done(function( data ) {
 				console.log(data);
-				var conceptList = '<h2>Concepts</h2><ul id="js-list-admin">';
+				var conceptList = '<ul id="js-list-admin">';
 				for (var i = 0; i < data.length; i++) {
 					var thisId = data[i].id;
 					var thisScore = scores[thisId] || 0;
-					conceptList = conceptList + '<li id=' + thisId + '><div class="js-link-concepts" data-id=' + thisId + '>' + data[i].name +
-						' <span class="js-delete" data-id=' + thisId + '> (Delete)</span><span id=understand-' + thisId + '></span><span> - ' + thisScore + " person doesn't understand this </div></li>";
+					conceptList += '<div class="row-fluid text-center"><div class="span12"><section class="panel"><div class="js-link-concepts" data-id=' + thisId + '>' + data[i].name +
+						' <span class="js-delete btn btn-mini btn-warning" data-id=' + thisId + '> (Delete)</span><span id=understand-' + thisId + '></span><span> - ' + thisScore + " person doesn't understand this </div></div></section></div></div>";
 				}
 				conceptList = conceptList + '</ul>';
 				conceptList += '<form class="form-inline" role="form"><div class="form-group">' +

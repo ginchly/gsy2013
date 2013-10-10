@@ -5,7 +5,7 @@
 <title>Mobile first web app theme | first</title>
 <meta name="description" content="mobile first, app, web app, responsive, admin dashboard, flat, flat ui">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<link rel="stylesheet" type="text/css" href="app-css.v1.css">
+<link rel="stylesheet" type="text/css" href="../app-css.v1.css">
 <!--[if lt IE 9]>
     <script src="js/respond.min.js"></script>
     <script src="js/html5.js"></script>
@@ -45,6 +45,6 @@
         <a href="#" class="btn btn-mini btn-circle btn-white"><i class="icon-google-plus"></i></a>
       </p>
     </div>
-  </footer><!-- / footer --><!-- Bootstrap --><!-- app --><script src="app-js.v1.js"></script>
+  </footer><!-- / footer --><!-- Bootstrap --><!-- app --><script src="../app-js.v1.js"></script>
 </body>
 </html>

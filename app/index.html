@@ -1,69 +1,64 @@
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Teacher feedback</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <!-- build:css(.tmp) styles/main.css -->
-        <link rel="stylesheet" href="styles/main.css">
-        <!-- endbuild -->
-    </head>
-    <body>
-        <!--[if lt IE 10]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>TeacherStandard</title>
+<meta name="description" content="mobile TeachStand, app, web app, responsive, admin dashboard, flat, flat ui">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link rel="stylesheet" type="text/css" href="app-css.v1.css">
+<!--[if lt IE 9]>
+    <script src="js/respond.min.js"></script>
+    <script src="js/html5.js"></script>
+    <script src="js/excanvas.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <!-- header -->
+  <header id="header" class="navbar navbar-sm bg bg-black">
+    <ul class="nav navbar-nav navbar-avatar pull-right">
+      <li class="dropdown">
+        <ul class="dropdown-menu">
+          <li><a href="student.html">For Students</a></li>
+          <li><a href="overview.html?session=1">Session Overview</a></li>
+          <li><a href="admin.html">Teacher's Admin</a></li>
+        </ul>
+      </li>
+    </ul>
+    <a class="navbar-brand" href="#">TeacherStandard</a>
 
+  </header><!-- / header -->
 
-        <div class="container">
-            <div class="header">
-                <ul class="nav nav-pills pull-right">
-                    <li class="active"><a href="#">Home</a></li>
-                </ul>
-                <h3 class="text-muted">Teacher Feedback</h3>
-            </div>
+  <section id="content">
 
-            <div class="row marketing">
-                <div class="col-lg-6">
-                    <h2>Teachers</h2>
+    <main class="main">
+            <div class="media-body">
+                      <h4>Home</h4>
+      <div class="row-fluid">
 
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Add checkpoint">
-                        <button type="button" class="btn btn-default" id="js-add-checkpoint">Add Checkpoint</button>
-                    </div>
-                    <h2>Pupils</h2>
-                </div>
-            </div>
-
-            <div class="footer">
-                <p>A product of Global Startup Youth</p>
-            </div>
-
+        <div class="span12">
+        	<div class="row-fluid text-center">
+        		<a href="student.html"><div class="span12"><section class="panel"><div class="center btn btn-primary btn-large">Students</div></section></div></a>
+        		<a href="overview.html?session=1"><div class="span12"><section class="panel"><div class="center btn btn-primary btn-large">Session Overview</div></section></div></a>
+        		<a href="admin.html"><div class="span12"><section class="panel"><div class="center btn btn-primary btn-large">Admin</div></section>
+        		</div></a>
+        	</div>
         </div>
+			</div>
+      </div>
 
-        <script src="bower_components/jquery/jquery.js"></script>
+    </main>
+  </section>
 
-        <script src="scripts/main.js"></script>
-        <script src="scripts/recognition.js"></script>
+  <!-- footer -->
+  <footer id="footer">
+    <div class="text-center padder clearfix">
+      <p>
+        <small>Produced at Global Startup Youth 2013</small><br><br><a href="#" class="btn btn-mini btn-circle btn-twitter"><i class="icon-twitter"></i></a>
+        <a href="#" class="btn btn-mini btn-circle btn-facebook"><i class="icon-facebook"></i></a>
+        <a href="#" class="btn btn-mini btn-circle btn-gplus"><i class="icon-google-plus"></i></a>
+      </p>
+    </div>
+  </footer><!-- / footer --><!-- Bootstrap --><!-- app --><!-- Sparkline Chart --><!-- Easy Pie Chart --><script src="app-js.v1.js"></script>
 
-        <!-- build:js scripts/plugins.js -->
-        <script src="bower_components/sass-bootstrap/js/affix.js"></script>
-        <script src="bower_components/sass-bootstrap/js/alert.js"></script>
-        <script src="bower_components/sass-bootstrap/js/dropdown.js"></script>
-        <script src="bower_components/sass-bootstrap/js/tooltip.js"></script>
-        <script src="bower_components/sass-bootstrap/js/modal.js"></script>
-        <script src="bower_components/sass-bootstrap/js/transition.js"></script>
-        <script src="bower_components/sass-bootstrap/js/button.js"></script>
-        <script src="bower_components/sass-bootstrap/js/popover.js"></script>
-        <script src="bower_components/sass-bootstrap/js/carousel.js"></script>
-        <script src="bower_components/sass-bootstrap/js/scrollspy.js"></script>
-        <script src="bower_components/sass-bootstrap/js/collapse.js"></script>
-        <script src="bower_components/sass-bootstrap/js/tab.js"></script>
-        <!-- endbuild -->
 </body>
 </html>

@@ -49,13 +49,11 @@ $( document ).ready(function() {
 		})
 		.done(function( data ) {
 			var distanceAway;
-			console.log(data);
-			var courseList = '<ul>';
+			var courseList = '';
 			for (var i = 0; i < data.length; i++) {
 				distanceAway = calculateDistance(startPos.coords.latitude, startPos.coords.longitude, data[i].lat, data[i].long);
-				courseList = courseList + '<li><div class="js-link-course" data-id=' + data[i].id + '>' + data[i].name + ' (' + Math.round(distanceAway * 10) / 10 + ' km away)</li>';
+				courseList += '<div class="row-fluid text-center"><div class="span12"><section class="panel"><div class="js-link-course" data-id=' + data[i].id + '>' + data[i].name + ' (' + Math.round(distanceAway * 10) / 10 + ' km away)</section></div></div>';
 			}
-			courseList = courseList + '</ul>';
 			$('#js-all-courses').html(courseList);
 
 			$('.js-link-course').click(function() {
@@ -79,11 +77,10 @@ $( document ).ready(function() {
 		})
 		.done(function( data ) {
 			console.log(data);
-			var sessionList = '<h2>Sessions</h2><ul>';
+			var sessionList = '';
 			for (var i = 0; i < data.length; i++) {
-				sessionList = sessionList + '<li><div class="js-link-session" data-id=' + data[i].id + '>' + data[i].name + '</li>';
+				sessionList += '<div class="row-fluid text-center"><div class="span12"><section class="panel"><div class="js-link-session" data-id=' + data[i].id + '>' + data[i].name + '</div></section></div></div>';
 			}
-			sessionList = sessionList + '</ul>';
 			$('#js-content').html(sessionList);
 
 			$('.js-link-session').click(function() {
@@ -105,13 +102,11 @@ $( document ).ready(function() {
 			url: url
 		})
 		.done(function( data ) {
-			console.log(data);
-			var conceptList = '<h2>Concepts</h2><ul>';
+			var conceptList = '';
 			for (var i = 0; i < data.length; i++) {
-				conceptList = conceptList + '<li><div class="js-link-concepts" data-id=' + data[i].id + '>' + data[i].name +
-				'</span><span class="js-confused" id=' + data[i].id + ' data-id=' + data[i].id + '> (Confused)</span></li>';
+				conceptList += '<div class="row-fluid text-center"><div class="span12"><section class="panel"><div class="js-link-concepts" data-id=' + data[i].id + '><h4>' + data[i].name +
+				'</h4></div></header><div class="center btn btn-primary btn-large js-confused" id=' + data[i].id + ' data-id=' + data[i].id + '> Confused?</span>' + '</div></section></div></div>';
 			}
-			conceptList = conceptList + '</ul>';
 
 			$('#js-content').html(conceptList);
 
@@ -126,11 +121,11 @@ $( document ).ready(function() {
 				if ($('#' + thisId).hasClass('confused')) {
 					// minus
 					$('#' + thisId).removeClass('confused');
-					$('#' + thisId).html(' (Confused)');
+					$('#' + thisId).html(' Confused');
 					url += 'minus';
 				} else {
 					$('#' + thisId).addClass('confused');
-					$('#' + thisId).html(' (Got it now)');
+					$('#' + thisId).html(' Got it now');
 					// plus
 					url += 'plus';
 				}
@@ -144,6 +139,5 @@ $( document ).ready(function() {
 			});
 		});
 	}
-
 	storeLocation(getCourses);
 });
