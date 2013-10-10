@@ -127,6 +127,22 @@ app.configure( function() {
         });
     });
 
+    app.get('/api/sessions/:id/graphdata', function(req, res) {
+        var query = client.query('SELECT score, time from understandscore INNER JOIN concepts ON concepts.id=understandscore.concept WHERE session = ' + req.params.id);
+        var rows = [];
+        rows[0] = ['time', 'score'];
+        query.on('row', function(row) {
+            //fired once for each row returned
+            var thisRow = [parseFloat(row.time), row.score];
+            rows.push(thisRow);
+        });
+        query.on('end', function() {
+            //fired once and only once, after the last row has been returned and after all 'row' events are emitted
+            //in this example, the 'rows' array now contains an ordered set of all the rows which we received from postgres
+            res.json(rows);
+        });
+    });
+
     app.get('/api/courses', function(req, res) {
         var query = client.query('SELECT * FROM courses');
         var rows = [];
@@ -197,6 +213,17 @@ app.configure( function() {
         var query = client.query("INSERT INTO transcripts (transcript, session) VALUES ('" +  req.body.transcript  + "', " + req.params.id + ");");
         query.on('end', function() {
             res.json(true);
+        });
+    });
+
+    app.get('/api/sessions/:id/transcripts', function(req, res) {
+        var query = client.query('SELECT * FROM transcripts WHERE session = ' + req.params.id);
+        var rows = [];
+        query.on('row', function(row) {
+            rows.push(row);
+        });
+        query.on('end', function() {
+            res.json(rows);
         });
     });
 

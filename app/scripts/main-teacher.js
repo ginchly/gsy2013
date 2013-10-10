@@ -8,7 +8,7 @@ $( document ).ready(function() {
 	var prod;
 
 	var course, session;
-	var Recognition, finalTranscript = 'initial test content';
+	var Recognition, finalTranscript = 'START [TIME=' + new Date().getTime() + '] ';
 	var recordingStopped, addTimestampInt;
 
 	if (document.location.hostname.indexOf('heroku') !== 0) {
@@ -20,7 +20,6 @@ $( document ).ready(function() {
 	} else {
 		Recognition = new webkitSpeechRecognition();
 		Recognition.continuous = true;
-		Recognition.interimResults = true;// log state
 		Recognition.lang = 'en-US';
 	}
 
