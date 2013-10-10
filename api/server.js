@@ -86,6 +86,47 @@ app.configure( function() {
         });
     });
 
+    app.get('/api/understandScores', function(req, res) {
+        //aggregate over concepts first
+        // key by concept
+        var query = client.query('SELECT concept, SUM(score) FROM understandScore GROUP BY concept;');
+        var rows = {};
+        query.on('row', function(row) {
+            rows[row.concept] = row.sum;
+        });
+        query.on('end', function() {
+            res.json(rows);
+        });
+    });
+
+    app.get('/api/:concept/understandScores/plus', function(req, res) {
+        var query = client.query("INSERT INTO understandScore (concept, score, time) VALUES ('" +  req.params.concept  + "', 1, '" + new Date().getTime() + "');");
+        query.on('end', function() {
+            res.json(true);
+        });
+    });
+
+    app.get('/api/:concept/understandScores/minus', function(req, res) {
+        var query = client.query("INSERT INTO understandScore (concept, score, time) VALUES ('" +  req.params.concept  + "', -1, '" + new Date().getTime() + "');");
+        query.on('end', function() {
+            res.json(true);
+        });
+    });
+
+    app.get('/api/understandScores', function(req, res) {
+        var query = client.query('SELECT name, concept, SUM(score) FROM concepts INNER JOIN understandScore ON concepts.id=understandScore.concept WHERE session = ' + req.params.id + ' GROUP BY name, concept');
+        var rows = [];
+        query.on('row', function(row) {
+            //fired once for each row returned
+            rows.push(row);
+        });
+        query.on('end', function() {
+            //fired once and only once, after the last row has been returned and after all 'row' events are emitted
+            //in this example, the 'rows' array now contains an ordered set of all the rows which we received from postgres
+            res.json(rows);
+        });
+    });
+
     app.get('/api/courses', function(req, res) {
         var query = client.query('SELECT * FROM courses');
         var rows = [];

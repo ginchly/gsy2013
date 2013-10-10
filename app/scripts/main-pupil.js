@@ -108,10 +108,40 @@ $( document ).ready(function() {
 			console.log(data);
 			var conceptList = '<h2>Concepts</h2><ul>';
 			for (var i = 0; i < data.length; i++) {
-				conceptList = conceptList + '<li><div class="js-link-concepts" data-id=' + data[i].id + '>' + data[i].name + '</li>';
+				conceptList = conceptList + '<li><div class="js-link-concepts" data-id=' + data[i].id + '>' + data[i].name +
+				'</span><span class="js-confused" id=' + data[i].id + ' data-id=' + data[i].id + '> (Confused)</span></li>';
 			}
 			conceptList = conceptList + '</ul>';
+
 			$('#js-content').html(conceptList);
+
+			$('.js-confused').click(function() {
+				var thisId = $(this).data('id');
+				if (prod) {
+					url = './api/' + thisId + '/understandScores/';
+				} else {
+					url = 'http://localhost:5000/api/' + thisId + '/understandScores/';
+				}
+
+				if ($('#' + thisId).hasClass('confused')) {
+					// minus
+					$('#' + thisId).removeClass('confused');
+					$('#' + thisId).html(' (Confused)');
+					url += 'minus';
+				} else {
+					$('#' + thisId).addClass('confused');
+					$('#' + thisId).html(' (Got it now)');
+					// plus
+					url += 'plus';
+				}
+
+				$.ajax({
+				    url : url,
+				}).done(function() {
+					console.log('understand score updated');
+				});
+
+			});
 		});
 	}
 

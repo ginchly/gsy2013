@@ -73,6 +73,7 @@ $( document ).ready(function() {
 			sessionList += '<form class="form-inline" role="form"><div class="form-group">' +
 			  '<input type="email" class="form-control" id="js-add-session" placeholder="New session"></div>' +
 			  '<button id="js-btn-add-session" class="btn btn-default">Add</button></form>';
+
 			$('#js-content').html(sessionList);
 
 			$('.js-link-session').click(function() {
@@ -137,77 +138,99 @@ $( document ).ready(function() {
 		} else {
 			url = 'http://localhost:5000/api/sessions/' + sessionId + '/concepts';
 		}
+
+		var scoreUrl;
+		if (prod) {
+			scoreUrl = './api/understandScores';
+		} else {
+			scoreUrl = 'http://localhost:5000/api/understandScores';
+		}
+
+
 		$.ajax({
-			url: url
+			url: scoreUrl
 		})
 		.done(function( data ) {
-			console.log(data);
-			var conceptList = '<h2>Concepts</h2><ul id="js-list">';
-			for (var i = 0; i < data.length; i++) {
-				conceptList = conceptList + '<li id=' + data[i].id + '><div class="js-link-concepts" data-id=' + data[i].id + '>' + data[i].name +
-					' <span class="js-delete" data-id=' + data[i].id + '> (Delete)</span></div></li>';
-			}
-			conceptList = conceptList + '</ul>';
-			conceptList += '<form class="form-inline" role="form"><div class="form-group">' +
-			  '<input class="form-control" id="js-add-concept" placeholder="New concept"></div>' +
-			  '<button id="js-btn-add-concept"  class="btn btn-default">Add</button></form>';
-			conceptList += '<button type="button" class="btn btn-default" id="js-start-recording">Start recording</button>' +
-                        '<button type="button" class="btn btn-default" id="js-stop-recording">Stop recording</button>';
-
-			$('#js-content').html(conceptList);
-
-			$('.js-delete').click(function() {
-				var thisId = $(this).data('id');
-				$('#' + thisId).remove();
-				if (prod) {
-					url = './api/concepts/' + thisId;
-				} else {
-					url = 'http://localhost:5000/api/concepts/' + thisId;
+			var scores = data;
+			$.ajax({
+				url: url
+			}).done(function( data ) {
+				console.log(data);
+				var conceptList = '<h2>Concepts</h2><ul id="js-list-admin">';
+				for (var i = 0; i < data.length; i++) {
+					var thisId = data[i].id;
+					var thisScore = scores[thisId] || 0;
+					conceptList = conceptList + '<li id=' + thisId + '><div class="js-link-concepts" data-id=' + thisId + '>' + data[i].name +
+						' <span class="js-delete" data-id=' + thisId + '> (Delete)</span><span id=understand-' + thisId + '></span><span> - ' + thisScore + " person doesn't understand this </div></li>";
 				}
-				$.ajax({
-				    url : url,
-				    type: 'DELETE'
-				}).done(function() {
-					console.log('concept deleted');
+				conceptList = conceptList + '</ul>';
+				conceptList += '<form class="form-inline" role="form"><div class="form-group">' +
+				  '<input class="form-control" id="js-add-concept" placeholder="New concept"></div>' +
+				  '<button id="js-btn-add-concept"  class="btn btn-default">Add</button></form>';
+				conceptList += '<button type="button" class="btn btn-default" id="js-start-recording">Start recording</button>' +
+	                        '<button type="button" class="btn btn-default" id="js-stop-recording">Stop recording</button>';
+	            conceptList += '<div class="row-fluid"><button type="button" class="btn btn-default" id="js-refresh">Refresh</button></div>';
+
+				$('#js-content').html(conceptList);
+
+				$('.js-delete').click(function() {
+					var thisId = $(this).data('id');
+					$('#' + thisId).remove();
+					if (prod) {
+						url = './api/concepts/' + thisId;
+					} else {
+						url = 'http://localhost:5000/api/concepts/' + thisId;
+					}
+					$.ajax({
+					    url : url,
+					    type: 'DELETE'
+					}).done(function() {
+						console.log('concept deleted');
+					});
 				});
-			});
 
-			$('#js-start-recording').click(function() {
-				recordingStopped = false;
-				Recognition.start();
-			});
+				$('#js-refresh').click(function() {
+					event.preventDefault();
+					getConcepts(session);
+				});
 
-			$('#js-stop-recording').click(function() {
-				Recognition.stop();
-				recordingStopped = true;
-			});
+				$('#js-start-recording').click(function() {
+					recordingStopped = false;
+					Recognition.start();
+				});
 
-			$('#js-btn-add-concept').click(function() {
-				event.preventDefault();
-				var newConcept = $('#js-add-concept').val();
-				$('#js-list').append('<li>' + newConcept + '</li>');
-				var formData = {};
-				formData.name = newConcept;
+				$('#js-stop-recording').click(function() {
+					Recognition.stop();
+					recordingStopped = true;
+				});
 
-				var postUrl;
+				$('#js-btn-add-concept').click(function() {
+					event.preventDefault();
+					var newConcept = $('#js-add-concept').val();
+					$('#js-list-admin').append('<li>' + newConcept + '</li>');
+					var formData = {};
+					formData.name = newConcept;
 
-				if (prod) {
-					postUrl = './api/sessions/' + session + '/concepts';
-				} else {
-					postUrl = 'http://localhost:5000/api/sessions/' + session + '/concepts';
-				}
-				$.ajax({
-				    url : postUrl,
-				    type: 'POST',
-				    data : formData,
-				    success: function()
-				    {
-				        console.log('new concept created successfully');
-				    },
-				    error: function ()
-				    {
-						console.log('error trying to create new concept');
-				    }
+					var postUrl;
+
+					if (prod) {
+						postUrl = './api/sessions/' + session + '/concepts';
+					} else {
+						postUrl = 'http://localhost:5000/api/sessions/' + session + '/concepts';
+					}
+					$.ajax({
+					    url : postUrl,
+					    type: 'POST',
+					    data : formData,
+					    success: function()
+					    {
+					        console.log('new concept created successfully');
+					    },
+					    error: function ()
+					    {
+							console.log('error trying to create new concept');
+					    }
+					});
 				});
 			});
 		});

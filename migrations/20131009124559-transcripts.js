@@ -6,7 +6,7 @@ exports.up = function (db, callback) {
     id: { type: 'int', primaryKey: true, autoIncrement: true },
     transcript: 'string',
     session: 'int',
-    time: 'int'
+    time: 'bigint'
   }, callback);
 };
 
