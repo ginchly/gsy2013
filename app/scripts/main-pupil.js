@@ -5,7 +5,7 @@ $( document ).ready(function() {
 	var urlRoot = '';
 	var startPos;
 
-	if (document.location.hostname.indexOf('heroku') === 0) {
+	if (document.location.hostname.indexOf('heroku') !== 0) {
 		prod = true;
 	}
 

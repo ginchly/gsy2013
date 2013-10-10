@@ -11,7 +11,7 @@ $( document ).ready(function() {
 	var Recognition, finalTranscript = 'initial test content';
 	var recordingStopped, addTimestampInt;
 
-	if (document.location.hostname.indexOf('heroku') === 0) {
+	if (document.location.hostname.indexOf('heroku') !== 0) {
 		prod = true;
 	}
 
