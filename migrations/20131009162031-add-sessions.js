@@ -7,9 +7,9 @@ exports.up = function (db, callback) {
 		name: { type: 'string' },
 		course: { type: 'int' }
 	}, function() {
-		db.insert('sessions', ['name', 'course'] , ['Introduction To Computer Science', 1], function() {
-			db.insert('sessions', ['name', 'course'] , ['Efficiency and Order of Growth', 1], function() {
-				db.insert('sessions', ['name', 'course'] , ['Memory and Search Methods', 1], callback);
+		db.insert('sessions', ['name', 'course'] , ['Team 25 - Education', 1], function() {
+			db.insert('sessions', ['name', 'course'] , ['Team 79 - Environment', 1], function() {
+				db.insert('sessions', ['name', 'course'] , ['Team 85 - Health', 1], callback);
 				});
 			});
 		});

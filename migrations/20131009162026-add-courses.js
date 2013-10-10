@@ -8,7 +8,7 @@ exports.up = function (db, callback) {
 		lat: {type: 'decimal'},
 		long: {type: 'decimal'}
 	}, function() {
-		db.insert('courses', ['name', 'lat', 'long'] , ['CS101', 3.17717, 101.66675], callback);
+		db.insert('courses', ['name', 'lat', 'long'] , ['Global Startup Youth - Kuala Lumpur', 3.17717, 101.66675], callback);
 	});
 };
 
