@@ -40,7 +40,7 @@ $( document ).ready(function() {
 	function getCourses() {
 		var url;
 		if (prod) {
-			url = './api/courses';
+			url = '../api/courses';
 		} else {
 			url = 'http://localhost:5000/api/courses';
 		}
